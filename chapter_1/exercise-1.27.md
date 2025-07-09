@@ -25,20 +25,21 @@ Let's just run the number and see:
           (* base (expmod base (- exp 1) m))
           m))))
 
-(define (test n)
-  (define (test-iter n a)
+
+(define (carmichael-test n)
+  (define (carmichael-test-iter n a)
     (cond
       [(= a n) #t]
-      [(= (expmod a n n) a) (test-iter n (+ a 1))]
+      [(= (expmod a n n) a) (carmichael-test-iter n (+ a 1))]
       [else #f]))
   
-  (test-iter n 1))
+  (carmichael-test-iter n 1))
 
 (define carmichaels
   '(561 1105 1729 2465 2821 6601 8911 10585 15841 29341
     41041 46657))
 
-(map test carmichaels)
+(map carmichael-test carmichaels)
 ```
 
 Evaluates to:
